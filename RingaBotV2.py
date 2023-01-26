@@ -154,12 +154,38 @@ def CheckUnitEnd():
 
 Unitnum = 400
 
+
+
+
+
 print("自分のIDを入力してください")
 loginid = str(input())
 print("ログインパスワードを入力してください")
 loginpass = str(input())
 
 while(1):
+    print("開始する番号を入力して下さい")
+    Unitnum = int(input())
+    if Unitnum % 25 == 1:
+        Unitnum = Unitnum + 24
+        break
+    else:
+        print("無効な番号です。入力しなおして下さい。")
+
+while(1):
+    print("終了する番号を入力して下さい")
+    Unitnum_end = int(input())
+    if Unitnum_end % 25 == 0:
+        Unitnum_end = Unitnum_end + 25
+        break
+    else:
+        print("無効な番号です。入力しなおして下さい。")
+
+
+while(1):
+    if(Unitnum >= Unitnum_end):
+        print("指定されたUnitまでの解答が完了しました")
+        break
     #Chromeを開く
     driver = webdriver.Chrome()
     #タイムアウトの時間を設定
