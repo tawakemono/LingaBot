@@ -12,9 +12,6 @@ Alist = []
 
 
 
-
-
-
 def login(loginid,loginpass):
     try:
         #リンガポルタのページへ行く

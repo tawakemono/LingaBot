@@ -41,7 +41,6 @@ def login():
 
     except:
         print("Cannot login")
-        pass
 
 
 def selectcoset():
@@ -58,7 +57,7 @@ def selectcoset():
 
     except:
         print("Cannot go coset page")
-        pass
+
 
 
 def selectUnit(unit_num):
@@ -69,7 +68,8 @@ def selectUnit(unit_num):
     try:
         driver.execute_script(script)
     except:
-        pass
+        print("Cannot select Unit")
+
 
 
 def ans():
@@ -82,48 +82,65 @@ def ans():
         #Qlistに同じ問題が入っているか確認
         if(element.text in Qlist):
             #答えを入力
-            print("Qinst in Q")
+            #listから問題番号を取得
+            print("Qlist in Q")
             i = Qlist.index(element.text)
             print(i)
+            print("listから問題番号を取得することができた")
 
             #Alistから答えを取得
             anser = Alist[i]
             anser = str(anser)
             anser = anser.replace(" ","")
             print(anser)
+            print("Alistから答えを取得することができた")
+
 
             #答えを入力
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/div/div[3]/div/input")
             element.clear
             element.send_keys(anser)
+            print("答えを入力することができた")
+
 
             #回答ボタンを押す
             time.sleep(1)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")
             element.click()
+            print("回答ボタンを押すすることができた")
+
 
             #次へ進を押す
             time.sleep(1)
             wait. until(EC.presence_of_all_elements_located)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
             element.click()
+            print("次へ進を押すことができた")
+
+            return(0)
+
 
         else:
             #適当な答えを入力
-            Qlist.append(element.text)
+            question = element.text
+            print(question)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/div/div[3]/div/input")
             element.send_keys("a")
+            print("適当な答えを入力できた")
 
             #回答ボタンを押す
             time.sleep(1)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")
             element.click()
+            print("回答ボタンを押すことができた")
 
             #正解を見るボタンを押す
+            time.sleep(1)
             wait. until(EC.presence_of_all_elements_located)
             time.sleep(1)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form[1]/input[2]")
             element.click()
+            print("正解を見るボタンを押すことができた")
 
             #答えをlistへ入れる
             wait. until(EC.presence_of_all_elements_located)
@@ -131,40 +148,49 @@ def ans():
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form[1]/div/div[3]/input")
             anser = element.get_attribute("value")
             Alist.append(anser)
+            Qlist.append(question)
+            print("答えをlistへ入れることができた")
 
             #次に進むを押す
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
             element.click()
+            print("次に進むを押すことができた")
 
             print(Alist)
             print(Qlist)
+            return(0)
 
     except:
         print("ellor")
         return(1)
 
-Unitnum = 100
+Unitnum = 250
 
 while(1):
-
     login()
     selectcoset()
     selectUnit(Unitnum)
     print(Unitnum)
     while(1):
-        b=0
+        b = 0
         b = ans()
-        if(b == 1):
-            try:
-                plase = "/html/body/div[2]/div/div/table/tbody/tr[4]/td/form[2]/input[2]"
-                element = driver.find_element(By.XPATH,plase)
-            except:
+        print(b)
+        if (b == 1):
+            element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td")
+            if ((element.text) == "問題が有りません。"):
+                Unitnum = Unitnum+25
+                print(Unitnum)
+                driver.close()
                 break
-        else:
-            pass
+            else:
+                driver.close()
+                break
 
 
-time.sleep(3)
+
+
+#/html/body/div[2]/div/div/table/tbody/tr[4]/td
+
 
 """
             wait. until(EC.presence_of_all_elements_located)
@@ -176,3 +202,5 @@ time.sleep(3)
             Alist.append(element.text)
             print(Alist)
 """
+
+
