@@ -93,7 +93,7 @@ def Answer():
             element.click()
 
             #次へ進を押す
-            wait. until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")))
+            WebDriverWait(driver, 10). until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")))
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
             element.click()
 
@@ -148,8 +148,6 @@ def CheckUnitEnd():
             return(0)
     except:
         return(1)
-
-Unitnum = 400
 
 
 
