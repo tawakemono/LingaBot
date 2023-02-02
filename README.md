@@ -6,7 +6,7 @@
 自身のGoogle Chromeのversionを確認しておいてください。
 ```
 pip install selenium
-pip install chromedriver-dinary==(Chromeのver)
+pip install chromedriver-binary==(Chromeのver)
 ```
 この二つをTerminalなどで入力してください。
 
