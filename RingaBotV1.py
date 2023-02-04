@@ -12,7 +12,7 @@ Alist = []
 
 
 
-def login(loginid,loginpass):
+def login():
     try:
         #リンガポルタのページへ行く
         driver.get('https://w5.linguaporta.jp/user/seibido/')
@@ -21,12 +21,12 @@ def login(loginid,loginpass):
         #IDを入力
         element = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/form/table/tbody/tr[1]/td/input")#elementに入力欄のパスを代入
         element.clear()#入力欄の中を削除
-        element.send_keys(loginid)#自分のログインID
+        element.send_keys("ログインID")#自分のログインID
 
         #passを入力
         element = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/form/table/tbody/tr[2]/td/input")
         element.clear()
-        element.send_keys(loginpass)#自分のパスワード
+        element.send_keys("ログインパスワード")#自分のパスワード
 
         #ログインボタンを押す
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/form/table/tbody/tr[3]/td/div/input")
@@ -153,10 +153,10 @@ def CheckUnitEnd():
 
 
 
-print("自分のIDを入力してください")
-loginid = str(input())
-print("ログインパスワードを入力してください")
-loginpass = str(input())
+#print("自分のIDを入力してください")
+#loginid = str(input())
+#print("ログインパスワードを入力してください")
+#loginpass = str(input())
 
 while(1):
     print("開始する番号を入力して下さい")
@@ -185,7 +185,7 @@ while(1):
     driver = webdriver.Chrome()
     #タイムアウトの時間を設定
     wait = WebDriverWait(driver, 20)
-    login(loginid,loginpass)
+    login()
     selectcoset()
     selectUnit(Unitnum)
     a = CheckUnitEnd()
