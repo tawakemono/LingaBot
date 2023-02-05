@@ -4,6 +4,8 @@ import chromedriver_binary
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 
@@ -30,7 +32,9 @@ def login(loginid,loginpass):
 
         #ログインボタンを押す
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/form/table/tbody/tr[3]/td/div/input")
+        ActionChains(driver).move_to_element(element).perform()
         element.click()#ボタンを押す
+        print("Can Login")
 
     except:
         print("Cannot login")
@@ -41,12 +45,13 @@ def selectcoset():
         #本の選択画面へ移行
         wait. until(EC.presence_of_all_elements_located)
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div[1]/dl/dt[2]/form/a")
-        element.click()
+        driver.execute_script('arguments[0].click();', element)
 
         #coset2600を選択
         wait. until(EC.presence_of_all_elements_located)
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/form/div/div[2]/div[3]/input")
-        element.click()
+        driver.execute_script('arguments[0].click();', element)
+        print("Can go cosset page")
 
     except:
         print("Cannot go coset page")
@@ -80,6 +85,7 @@ def Answer():
             anser = Alist[i]
             anser = str(anser)
             anser = anser.replace(" ","")
+            print(question)
             print(anser)
 
             #答えを入力
@@ -90,14 +96,16 @@ def Answer():
             #回答ボタンを押す
             wait. until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")))
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")
-            element.click()
+            driver.execute_script('arguments[0].click();', element)
 
             #次へ進を押す
             WebDriverWait(driver, 10). until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")))
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
-            element.click()
+            driver.execute_script('arguments[0].click();', element)
 
         else:
+            print("question not in Qlist")
+            print("question="+question)
             #回答欄に適当な答えを入力
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/div/div[3]/div/input")
             element.clear
@@ -106,13 +114,13 @@ def Answer():
             #回答ボタンを押す
             wait. until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")))
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/input[3]")
-            element.click()
+            driver.execute_script('arguments[0].click();', element)
 
             #正解を見るを押す
             wait. until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form[1]/input[2]")))
             wait.until(EC.presence_of_all_elements_located)
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form[1]/input[2]")
-            element.click()
+            driver.execute_script('arguments[0].click();', element)
 
             #問題の答えを入手
             wait. until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")))
@@ -123,10 +131,10 @@ def Answer():
 
             #次に進むを押す
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
-            element.click()
+            driver.execute_script('arguments[0].click();', element)
 
-            print(Alist)
-            print(Qlist)
+            #print(Alist)
+            #print(Qlist)
 
         return(0)
 
@@ -196,6 +204,7 @@ while(1):
         driver.close()
         continue
     while(1):
+        print("======================================")
         b = 0
         b = Answer()
         if(b == 1):
