@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 
@@ -190,7 +191,7 @@ while(1):
         print("指定されたUnitまでの解答が完了しました")
         break
     #Chromeを開く
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     #タイムアウトの時間を設定
     wait = WebDriverWait(driver, 20)
     login(loginid,loginpass)
