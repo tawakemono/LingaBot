@@ -7,11 +7,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
+from tkinter import *
+from tkinter import ttk
 import time
 
 
 Qlist = []
 Alist = []
+
+
+def close_window():
+    root.destroy()
 
 
 
@@ -159,31 +165,74 @@ def CheckUnitEnd():
         return(1)
 
 
+root = Tk()
+root.title('LingaBot')
+root.resizable(False, False)
+frame1 = ttk.Frame(root, padding=(32))
+frame1.grid()
 
+label1 = ttk.Label(frame1, text='Username', padding=(5, 2))
+label1.grid(row=0, column=0, sticky=E)
 
+label2 = ttk.Label(frame1, text='Password', padding=(5, 2))
+label2.grid(row=1, column=0, sticky=E)
 
-print("自分のIDを入力してください")
-loginid = str(input())
-print("ログインパスワードを入力してください")
-loginpass = str(input())
+label2 = ttk.Label(frame1, text='StartNum', padding=(5, 2))
+label2.grid(row=2, column=0, sticky=E)
 
-while(1):
-    print("開始する番号を入力して下さい")
-    Unitnum = int(input())
-    if Unitnum % 25 == 1:
-        Unitnum = Unitnum + 24
-        break
-    else:
-        print("無効な番号です。入力しなおして下さい。")
+label2 = ttk.Label(frame1, text='EndNum', padding=(5, 2))
+label2.grid(row=3, column=0, sticky=E)
 
-while(1):
-    print("終了する番号を入力して下さい")
-    Unitnum_end = int(input())
-    if Unitnum_end % 25 == 0:
-        Unitnum_end = Unitnum_end + 25
-        break
-    else:
-        print("無効な番号です。入力しなおして下さい。")
+# Username Entry
+username = StringVar()
+username_entry = ttk.Entry(
+    frame1,
+    textvariable=username,
+    width=20)
+username_entry.grid(row=0, column=1)
+
+# Password Entry
+password = StringVar()
+password_entry = ttk.Entry(
+    frame1,
+    textvariable=password,
+    width=20,
+    show='*')
+password_entry.grid(row=1, column=1)
+
+#StartNum Entry
+StartNum = StringVar()
+StartNum_entry = ttk.Entry(
+    frame1,
+    textvariable=StartNum,
+    width=20)
+StartNum_entry.grid(row=2, column=1)
+
+#EndNum Entry
+EndNum = StringVar()
+EndNum_entry = ttk.Entry(
+    frame1,
+    textvariable=EndNum,
+    width=20)
+EndNum_entry.grid(row=3, column=1)
+
+frame2 = ttk.Frame(frame1, padding=(0, 5))
+frame2.grid(row=4, column=1, sticky=W)
+
+button1 = ttk.Button(
+    frame2, text='OK',
+    command=lambda:[close_window()])
+button1.pack(side=LEFT)
+
+button2 = ttk.Button(frame2, text='Cancel', command=quit)
+button2.pack(side=LEFT)
+
+root.mainloop()
+
+loginid = str(username.get())
+loginpass = str(password.get())
+Unitnum = int(StartNum.get())
+Unitnum_end = int(EndNum.get())
 
 
 while(1):
