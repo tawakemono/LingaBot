@@ -6,18 +6,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+import time
 from tkinter import *
 from tkinter import ttk
-import time
 
 
 Qlist = []
 Alist = []
-
-
-def close_window():
-    root.destroy()
 
 
 
@@ -39,9 +36,8 @@ def login(loginid,loginpass):
 
         #ログインボタンを押す
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/form/table/tbody/tr[3]/td/div/input")
-        ActionChains(driver).move_to_element(element).perform()
-        element.click()#ボタンを押す
-        print("Can Login")
+        driver.execute_script('arguments[0].click();', element)#ボタンを押す
+#        print("Can Login")
 
     except:
         print("Cannot login")
@@ -58,9 +54,10 @@ def selectcoset():
         wait. until(EC.presence_of_all_elements_located)
         element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/form/div/div[2]/div[3]/input")
         driver.execute_script('arguments[0].click();', element)
-        print("Can go cosset page")
+#        print("Can go cosset page")
 
     except:
+        print("Incorrect password")
         print("Cannot go coset page")
 
 
@@ -86,14 +83,15 @@ def Answer():
             print("question in Qlist")
             #Qlistから問題番号を取得
             i = Qlist.index(question)
-            print(i)
+            a=i
+            print("listnum = "+str(a))
 
             #Alistから答えを取得
             anser = Alist[i]
             anser = str(anser)
             anser = anser.replace(" ","")
-            print(question)
-            print(anser)
+            print("question = "+question)
+            print("anser = "+anser)
 
             #答えを入力
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/div/div[3]/div/input")
@@ -109,10 +107,11 @@ def Answer():
             WebDriverWait(driver, 10). until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")))
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/div/form/input[1]")
             driver.execute_script('arguments[0].click();', element)
+            print("正解")
 
         else:
             print("question not in Qlist")
-            print("question="+question)
+            print("question = "+question)
             #回答欄に適当な答えを入力
             element = driver.find_element(By.XPATH,"/html/body/div[2]/div/div/table/tbody/tr[4]/td/form/div/div[3]/div/input")
             element.clear
@@ -164,6 +163,15 @@ def CheckUnitEnd():
     except:
         return(1)
 
+
+
+
+
+def Getinfo(a):
+    User = a
+
+def close_window():
+    root.destroy()
 
 root = Tk()
 root.title('LingaBot')
@@ -221,7 +229,7 @@ frame2.grid(row=4, column=1, sticky=W)
 
 button1 = ttk.Button(
     frame2, text='OK',
-    command=lambda:[close_window()])
+    command=lambda:[Getinfo(username.get()),close_window()])
 button1.pack(side=LEFT)
 
 button2 = ttk.Button(frame2, text='Cancel', command=quit)
@@ -231,16 +239,23 @@ root.mainloop()
 
 loginid = str(username.get())
 loginpass = str(password.get())
-Unitnum = int(StartNum.get())
-Unitnum_end = int(EndNum.get())
+Unitnum = int(StartNum.get()) + 24
+Unitnum_end = int(EndNum.get()) + 25
 
 
 while(1):
     if(Unitnum >= Unitnum_end):
         print("指定されたUnitまでの解答が完了しました")
         break
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print("Now    "+str(Unitnum-24)+"->"+str(Unitnum))
     #Chromeを開く
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    options = Options()
+#    options.add_argument('--headless')
+    options.add_argument('--disable-logging')
+    options.add_argument('--log-level=3')
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
     #タイムアウトの時間を設定
     wait = WebDriverWait(driver, 20)
     login(loginid,loginpass)
@@ -248,6 +263,7 @@ while(1):
     selectUnit(Unitnum)
     a = CheckUnitEnd()
     if(a == 1):
+        print("This unit is already done")
         Unitnum = Unitnum+25
         Qlist.clear()
         Alist.clear()

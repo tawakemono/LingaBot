@@ -72,7 +72,10 @@ button2.pack(side=LEFT)
 
 root.mainloop()
 
-
+loginid = str(username.get())
+Loginpass = str(password.get())
+Unitnum = int(StartNum.get())
+Unitnum_end = int(EndNum.get())
 
 print(str(username.get()))
 print(str(password.get()))
