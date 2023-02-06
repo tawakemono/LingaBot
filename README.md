@@ -12,20 +12,17 @@ V2はウィンドウが表示されます。
 
 ## 使いかた
 
-自身のGoogle Chromeのversionを確認しておいてください。
 ```
 pip install selenium
-pip install chromedriver-binary==(Chromeのver)
+pip install webdriver-manager
 ```
 この二つをTerminalなどで入力してください。
 
 できないときはこちらを試してみてください。
 ```
 py -m pip install selenium
-py -m pip install chromedriver-binary==(Chromeのver)
+py -m pip install webdriver-manager
 ```
-これを入力してもエラーが出ることが多いと思います。
-その時はエラーメッセージの中にインストール可能なバージョンが赤い文字で表示されていると思いますので、自分のGoogle Chromeのバージョンより古くて一番近いバージョンのものに変えてもう一度インストールしてください。
 
 始めるときは
 ```
