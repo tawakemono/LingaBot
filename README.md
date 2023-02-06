@@ -26,12 +26,12 @@ py -m pip install webdriver-manager
 
 始めるときは
 ```
-py RingaBotV1.py
+py LingaBotV1.py
 ```
 
 または、
 ```
-py RingaBotV2.py
+py LingaBotV2.py
 ```
 で実行できます。
 
