@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import chromedriver_binary
+#import chromedriver_binary
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -275,3 +275,12 @@ while(1):
         b = Answer()
         if(b == 1):
             break
+
+root = Tk()
+root.title("終了")
+
+label = ttk.Label(root,text ='指定されたUnitまでの解答が完了しました')
+label.pack()
+
+#ウィンドウの表示
+root.mainloop()
