@@ -1,9 +1,18 @@
 # README
 リンガポルタのBotで穴埋め問題で使えます
 
+## V1とV2の違い
+
+V1はウィンドウが表示されません。
+
+V2はウィンドウが表示されます。
+
+
+お好きなをお使いください。
+
 ## アプリを使う場合
 
-このリポジトリの中にある[Bot.exe](https://github.com/tawakemono/LingaBot/blob/master/bot.exe)というファイルをダウンロードしてください
+このリポジトリの中にある[bot.exe](https://github.com/tawakemono/LingaBot/blob/master/bot.exe)もしくは、[botv2.exe](https://github.com/tawakemono/LingaBot/blob/master/botv2.exe)をダウンロードしてください
 
 ダウンロードしたら実行することができます。
 
