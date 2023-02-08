@@ -179,17 +179,23 @@ root.resizable(False, False)
 frame1 = ttk.Frame(root, padding=(32))
 frame1.grid()
 
-label1 = ttk.Label(frame1, text='Username', padding=(5, 2))
-label1.grid(row=0, column=0, sticky=E)
+label1 = ttk.Label(frame1, text='Username', padding=(5, 2), foreground='#ff0000')
+label1.grid(row=0, column=0, sticky=W)
 
-label2 = ttk.Label(frame1, text='Password', padding=(5, 2))
-label2.grid(row=1, column=0, sticky=E)
+label2 = ttk.Label(frame1, text='Password', padding=(5, 2), foreground='#ff0000')
+label2.grid(row=1, column=0, sticky=W)
 
-label2 = ttk.Label(frame1, text='StartNum', padding=(5, 2))
-label2.grid(row=2, column=0, sticky=E)
+label3 = ttk.Label(frame1, text='StartNum', padding=(5, 2), foreground='#ff0000' )
+label3.grid(row=2, column=0, sticky=W)
 
-label2 = ttk.Label(frame1, text='EndNum', padding=(5, 2))
-label2.grid(row=3, column=0, sticky=E)
+label4 = ttk.Label(frame1, text=' 1-25の場合は1, 126-150の場合は126', padding=(0, 0))
+label4.grid(row=3, column=0, columnspan = 2, sticky=W)
+
+label5 = ttk.Label(frame1, text='EndNum', padding=(5, 2), foreground='#ff0000')
+label5.grid(row=4, column=0, sticky=W)
+
+label6 = ttk.Label(frame1, text=' 976-1000を最後にするなら1000', padding=(0, 0))
+label6.grid(row=5, column=0, columnspan = 2, sticky=W)
 
 # Username Entry
 username = StringVar()
@@ -222,10 +228,10 @@ EndNum_entry = ttk.Entry(
     frame1,
     textvariable=EndNum,
     width=20)
-EndNum_entry.grid(row=3, column=1)
+EndNum_entry.grid(row=4, column=1)
 
 frame2 = ttk.Frame(frame1, padding=(0, 5))
-frame2.grid(row=4, column=1, sticky=W)
+frame2.grid(row=6, column=0, columnspan = 2, sticky=N)
 
 button1 = ttk.Button(
     frame2, text='OK',
