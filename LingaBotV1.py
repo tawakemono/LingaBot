@@ -210,9 +210,19 @@ while(1):
     a = CheckUnitEnd()
     if(a == 1):
         print("This unit is already done")
-        Unitnum = Unitnum+25
+        Qfilepass = "ansfile/Qestionlist"+str(Unitnum-24)+"_"+str(Unitnum)+".txt"
+        # ファイルを開く
+        with open(Qfilepass, "w") as file:
+            # リストの要素を1行ずつ書き込む
+            for item in Qlist:
+                file.write(item + "\n")
+        Afilepass = "ansfile/Anserlist"+str(Unitnum-24)+"_"+str(Unitnum)+".txt"
+        with open(Afilepass, "w") as file:
+            for item in Alist:
+                file.write(item + "\n")
         Qlist.clear()
         Alist.clear()
+        Unitnum = Unitnum+25
         driver.close()
         continue
     while(1):
