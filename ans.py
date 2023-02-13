@@ -4,15 +4,15 @@
 for i in range(5):
 
     # リストの作成
-    my_list = ["item"+ str(i), "item2", "item3"]
+    my_list = ["あいうえお"+ str(i), "さしすせそ", "たちつてと"]
 
-    filepass = "anslist/my_list"+ str(i) +".txt"
+    filepass = "ansfile/my_list"+ str(i) +".txt"
 
     # ファイルを開く
     with open(filepass, "w") as f:
         # リストの要素を1行ずつ書き込む
         for item in my_list:
-            f.write(item + "\n")
+            f.write(str(item) + "\n")
 
     list = []
 
