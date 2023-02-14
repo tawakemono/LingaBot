@@ -198,7 +198,7 @@ while(1):
     print("Now    "+str(Unitnum-24)+"->"+str(Unitnum))
     #Chromeを開く
     options = Options()
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     options.add_argument('--disable-logging')
     options.add_argument('--log-level=3')
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
