@@ -1,24 +1,46 @@
+import json
 
+Unitnum = 1
 
+data = {}
 
-for i in range(5):
+Alist = []
+Qlist = []
 
-    # リストの作成
-    my_list = ["あいうえお"+ str(i), "さしすせそ", "たちつてと"]
+Alist2 = ["aaa","bbb"]
+Qlist2 = ["aaa","bbb"]
 
-    filepass = "ansfile/my_list"+ str(i) +".txt"
+for i in range(0,103):
+    Unitnum = (i * 25) +1
+    Qfilepass = "ansfile/Qestionlist"+str(Unitnum)+"_"+str(Unitnum+24)+".txt"
+    Afilepass = "ansfile/Anserlist"+str(Unitnum)+"_"+str(Unitnum+24)+".txt"
 
-    # ファイルを開く
-    with open(filepass, "w") as f:
-        # リストの要素を1行ずつ書き込む
-        for item in my_list:
-            f.write(str(item) + "\n")
-
-    list = []
-
-    with open(filepass, "r") as file:
+    with open(Afilepass, "r") as file:
         for line in file:
-            list.append(str(line.strip()))
+            Alist.append(str(line.strip()))
+
+    with open(Qfilepass, "r") as file:
+        for line in file:
+            Qlist.append(str(line.strip()))
 
 
-    print(list)
+    Alist2 = Alist[:]
+    Qlist2 = Qlist[:]
+
+    Alist.clear()
+    Qlist.clear()
+
+    data["Answerlist"+str(Unitnum)+"_"+str(Unitnum+24)] = Alist2
+    data["Qestionlist"+str(Unitnum)+"_"+str(Unitnum+24)] = Qlist2
+
+    print(Alist2)
+    print(Qlist2)
+
+    print(data)
+
+
+
+# ファイルに書き込む
+with open("data.json", "w") as file:
+    json.dump(data, file,indent=4)
+
