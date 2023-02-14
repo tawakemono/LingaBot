@@ -1,14 +1,21 @@
 # README
 リンガポルタのBotで穴埋め問題で使えます
 
-## V1とV2の違い
+## Vの違い
 
 V1はウィンドウが表示されません。
 
 V2はウィンドウが表示されます。
 
+V3とV4は全問正解することができます。
 
-お好きなほうをお使いください。
+V3は解答の保存に.txtファイルを使っておりV4は.jsonファイルを使っています。
+
+V3は[ansfile](https://github.com/tawakemono/LingaBot/blob/master/ansfile)を
+
+V4は[data.json](https://github.com/tawakemono/LingaBot/blob/master/data.json)を一緒にダウンロードしてください。
+
+お好きなものをお使いください。
 
 ## アプリを使う場合
 
