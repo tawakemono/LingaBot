@@ -10,6 +10,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 
+from selenium import webdriver
+
+from selenium.webdriver.support.wait import WebDriverWait
+
+import requests
+
+
 Qlist = []
 Alist = []
 
@@ -202,7 +209,19 @@ while(1):
     options.add_argument('--disable-logging')
     options.add_argument('--log-level=3')
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+    options.add_argument('--disable-gpu')
+    options.add_argument('--ignore-certificate-errors')# SSLエラー対策
+    options.add_argument('--disable-blink-features=AutomationControlled')# webdriver検出を回避
+    options.add_argument('--blink-settings=imagesEnabled=false')# 画像非表示
+    url = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE'
+    response = requests.get(url)
+    try:
+        driver_path = ChromeDriverManager().install()
+        driver = webdriver.Chrome(executable_path=driver_path, options=options)
+    except ValueError:
+        # ValueErrorが発生した場合、バージョンを指定してインストール
+        driver_path = ChromeDriverManager(version=response.text).install()
+        driver = webdriver.Chrome(executable_path=driver_path, options=options)
     #タイムアウトの時間を設定
     wait = WebDriverWait(driver, 20)
     login(loginid,loginpass)
